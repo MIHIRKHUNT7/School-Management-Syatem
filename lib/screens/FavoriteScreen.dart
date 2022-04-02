@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import '../database/db_service.dart';
 import '../main.dart';
@@ -126,6 +126,24 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       onTap: () {},
                       child: Stack(
                         children: [
+                           Container(
+                            alignment: Alignment.topRight,
+                             padding: EdgeInsets.only(right: 10, top: 20),
+                            child: FavoriteButton(
+                              isFavorite:
+                              nb[index].IsFavorite == 1 ? true : false,
+                              valueChanged: (favbutton) {
+                                if (favbutton == true) {
+                                  dbService.setFav(
+                                      1, int.parse(nb[index].id.toString()));
+                                }
+                                if (favbutton == false) {
+                                  dbService.setFav(
+                                      0, int.parse(nb[index].id.toString()));
+                                }
+                              },
+                            ),
+                          ),
                           Container(
                             padding:
                             EdgeInsets.only(right: 30, top: 30, bottom: 30),

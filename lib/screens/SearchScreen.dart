@@ -188,7 +188,7 @@ class _SearchScreenState extends State<SearchScreen> {
           itemCount: nb.length,
           itemBuilder: (BuildContext context, int index) {
             return Container(
-              margin: EdgeInsets.fromLTRB(0, 0, 10, 20),
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: SizedBox(
                 width: double.infinity,
                 child: Card(

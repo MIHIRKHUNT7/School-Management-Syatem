@@ -21,6 +21,7 @@ class _ViewScreenState extends State<ViewScreen> {
     setState(() {});
   }
 
+  @override
   void initState() {
     get();
   }
@@ -43,7 +44,7 @@ class _ViewScreenState extends State<ViewScreen> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.only(top: 30, left: 30, right: 30),
+        padding: EdgeInsets.only(top: 10, left: 20, right: 20),
         child: ListView(
           children: [
             Column(
@@ -382,87 +383,85 @@ class _ViewScreenState extends State<ViewScreen> {
                                                       width: 60,
                                                     ),*/
                                                       Container(
-                                                        child: Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  top: 20),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceEvenly,
-                                                            children: [
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  Navigator.push(
-                                                                      context,
-                                                                      MaterialPageRoute(
-                                                                          builder: (context) => AddScreen(
-                                                                                isEditMode: true,
-                                                                                user: user[index],
-                                                                              )));
-                                                                },
-                                                                child: Icon(
-                                                                  Icons.edit,
-                                                                  color: Colors
-                                                                      .green,
-                                                                  size: 30,
-                                                                ),
+                                                        margin:
+                                                            EdgeInsets.only(
+                                                                top: 20),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: [
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                Navigator.push(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                        builder: (context) => AddScreen(
+                                                                              isEditMode: true,
+                                                                              user: user[index],
+                                                                            )));
+                                                              },
+                                                              child: Icon(
+                                                                Icons.edit,
+                                                                color: Colors
+                                                                    .green,
+                                                                size: 30,
                                                               ),
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (BuildContext
-                                                                              contex) {
-                                                                        return AlertDialog(
-                                                                          title:
-                                                                              Text("Delete"),
-                                                                          content:
-                                                                              Text("Do you want to delete this record"),
-                                                                          actions: [
-                                                                            Row(
-                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                                                              children: [
-                                                                                ElevatedButton(
-                                                                                  onPressed: () {
-                                                                                    dbService.deleteUser(nb[index]).then(
-                                                                                      (value) {
-                                                                                        setState(() {
-                                                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
-                                                                                        });
-                                                                                      },
-                                                                                    );
-                                                                                  },
-                                                                                  child: Text("Delete"),
-                                                                                ),
-                                                                                SizedBox(
-                                                                                  width: 5,
-                                                                                ),
-                                                                                ElevatedButton(
-                                                                                  onPressed: () {
-                                                                                    Navigator.of(context).pop();
-                                                                                  },
-                                                                                  child: Text("No"),
-                                                                                )
-                                                                              ],
-                                                                            )
-                                                                          ],
-                                                                        );
-                                                                      });
-                                                                },
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .delete_rounded,
-                                                                  color: Colors
-                                                                      .red,
-                                                                  size: 30,
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
+                                                            ),
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (BuildContext
+                                                                            contex) {
+                                                                      return AlertDialog(
+                                                                        title:
+                                                                            Text("Delete"),
+                                                                        content:
+                                                                            Text("Do you want to delete this record"),
+                                                                        actions: [
+                                                                          Row(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                                                            children: [
+                                                                              ElevatedButton(
+                                                                                onPressed: () {
+                                                                                  dbService.deleteUser(nb[index]).then(
+                                                                                    (value) {
+                                                                                      setState(() {
+                                                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                                                                                      });
+                                                                                    },
+                                                                                  );
+                                                                                },
+                                                                                child: Text("Delete"),
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 5,
+                                                                              ),
+                                                                              ElevatedButton(
+                                                                                onPressed: () {
+                                                                                  Navigator.of(context).pop();
+                                                                                },
+                                                                                child: Text("No"),
+                                                                              )
+                                                                            ],
+                                                                          )
+                                                                        ],
+                                                                      );
+                                                                    });
+                                                              },
+                                                              child: Icon(
+                                                                Icons
+                                                                    .delete_rounded,
+                                                                color: Colors
+                                                                    .red,
+                                                                size: 30,
+                                                              ),
+                                                            )
+                                                          ],
                                                         ),
                                                       )
                                                     ],
