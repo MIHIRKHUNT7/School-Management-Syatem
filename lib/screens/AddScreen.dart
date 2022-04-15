@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:school_management_system/database/db_service.dart';
 import 'package:school_management_system/model/userMeta.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
-import '../main.dart';
+import 'ViewScreen.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({Key? key, this.user, this.isEditMode = false})
@@ -23,8 +23,7 @@ class _AddScreenState extends State<AddScreen> {
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
   TextEditingController _DateOfBirthController = TextEditingController();
   DateTime? _dateOfBirth;
-
-//  bool isDisableButton = true;
+  bool isDisableButton = true;
   late int a;
   late DbService dbService;
 
@@ -40,7 +39,6 @@ class _AddScreenState extends State<AddScreen> {
   String address = "";
 
   late String value;
-
   @override
   void initState() {
     dbService = DbService();
@@ -64,8 +62,9 @@ class _AddScreenState extends State<AddScreen> {
     }
 
     if (widget.isEditMode) {
-      _DateOfBirthController.text = user.DOB;
       user = widget.user!;
+      _DateOfBirthController.text = user.DOB;
+
       List<String> n = user.DOB.split("/");
       initialDate = DateTime.parse(n[2] + '-' + n[1] + '-' + n[0]);
     } else {
@@ -84,14 +83,14 @@ class _AddScreenState extends State<AddScreen> {
               "UserName",
               "Name",
               "",
-              (onValidate) {
+                  (onValidate) {
                 if (onValidate.isEmpty) {
                   return "* Required";
                 }
 
                 return null;
               },
-              (onSaved) {
+                  (onSaved) {
                 user.UserName = onSaved.toString().trim();
               },
               focusedBorderWidth: 1,
@@ -101,10 +100,6 @@ class _AddScreenState extends State<AddScreen> {
               labelBold: true,
               paddingLeft: 0,
               borderRadius: 10,
-              /* prefixIcon: Icon(Icons.text_fields),
-              showPrefixIcon: true,
-              prefixIconPaddingLeft: 10,
-              prefixIconColor: Color.fromRGBO(34, 33, 91, .5),*/
               textColor: Color.fromRGBO(34, 33, 91, 1),
               borderFocusColor: Color.fromRGBO(34, 33, 91, 1),
               contentPadding: 15,
@@ -118,10 +113,10 @@ class _AddScreenState extends State<AddScreen> {
               "--Select--",
               user.Gender,
               gen,
-              (onChanged) {
+                  (onChanged) {
                 user.Gender = int.parse(onChanged);
               },
-              (onValidate) {
+                  (onValidate) {
                 if (onValidate == null) {
                   return "* Required";
                 }
@@ -133,11 +128,6 @@ class _AddScreenState extends State<AddScreen> {
               labelFontSize: 15,
               borderFocusColor: Color.fromRGBO(34, 33, 91, 1),
               borderColor: Color.fromRGBO(34, 33, 91, 1),
-              /* prefixIcon: Icon(Icons.male),
-              showPrefixIcon: true,
-              prefixIconPaddingLeft: 10,
-              prefixIconColor: Color.fromRGBO(34, 33, 91, .5),*/
-              contentPadding: 15,
               focusedBorderWidth: 1,
             ),
             Column(
@@ -201,15 +191,10 @@ class _AddScreenState extends State<AddScreen> {
               ],
             ),
             FormHelper.inputFieldWidgetWithLabel(
-                context, "MobileNumber", "Mobile Number", "", (onValidate) {
-              /*if (onValidate == null || value == null || value.isEmpty) {
-                this.value = value!;
-                return 'Please Select Date';
-              }
-              return null;*/
-            }, (onSaved) {
-              user.MobileNumber = onSaved;
-            },
+                context, "MobileNumber", "Mobile Number", "", (onValidate) {},
+                    (onSaved) {
+                  user.MobileNumber = onSaved;
+                },
                 focusedBorderWidth: 1,
                 borderWidth: 1,
                 borderColor: Color.fromRGBO(34, 33, 91, 1),
@@ -217,10 +202,6 @@ class _AddScreenState extends State<AddScreen> {
                 labelBold: true,
                 paddingLeft: 0,
                 borderRadius: 10,
-                /*prefixIcon: Icon(Icons.add_alert_sharp),
-                showPrefixIcon: true,
-                prefixIconPaddingLeft: 10,
-                prefixIconColor: Color.fromRGBO(34, 33, 91, .5),*/
                 textColor: Color.fromRGBO(34, 33, 91, 1),
                 borderFocusColor: Color.fromRGBO(34, 33, 91, 1),
                 contentPadding: 10,
@@ -233,13 +214,8 @@ class _AddScreenState extends State<AddScreen> {
               "Email",
               "Email",
               "",
-              (onValidate) {
-                if (onValidate == null) {
-                  return "* Required";
-                }
-                return null;
-              },
-              (onSaved) {
+                  (onValidate) {},
+                  (onSaved) {
                 user.Email = onSaved.toString().trim();
               },
               initialValue: user.Email.toString(),
@@ -250,10 +226,6 @@ class _AddScreenState extends State<AddScreen> {
               labelBold: true,
               paddingLeft: 0,
               borderRadius: 10,
-              /* prefixIcon: Icon(Icons.email),
-              showPrefixIcon: true,
-              prefixIconPaddingLeft: 10,
-              prefixIconColor: Color.fromRGBO(34, 33, 91, .5),*/
               textColor: Color.fromRGBO(34, 33, 91, 1),
               borderFocusColor: Color.fromRGBO(34, 33, 91, 1),
               contentPadding: 15,
@@ -281,7 +253,7 @@ class _AddScreenState extends State<AddScreen> {
                         ? user.StateName
                         : '--State--',
                     currentCity:
-                        user.CityName.isNotEmpty ? user.CityName : '--City--',
+                    user.CityName.isNotEmpty ? user.CityName : '--City--',
                     showStates: true,
                     showCities: true,
                     flagState: CountryFlag.ENABLE,
@@ -331,7 +303,7 @@ class _AddScreenState extends State<AddScreen> {
                     },
                     onCityChanged: (value) {
                       setState(
-                        () {
+                            () {
                           cityValue = value.toString();
                           user.CityName = cityValue;
                         },
@@ -348,30 +320,39 @@ class _AddScreenState extends State<AddScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: /* isDisableButton
-                        ? null
-                        :*/
+                    onPressed:
                         () {
                       if (validateAndSave()) {
                         if (widget.isEditMode) {
                           dbService.updateUser(user).then((value) {
-                            FormHelper.showSimpleAlertDialog(context, "SQFlite",
-                                "Data Modified Successfully ", "Ok", () {
+                            FormHelper.showSimpleAlertDialog(
+                                context,
+                                "SQFlite",
+                                "Data Modified Successfully ",
+                                "Ok", () {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => MyHomePage()));
+                                      builder: (context) =>
+                                          ViewScreen()));
                             });
                           });
                           globalKey.currentState!.save();
                         } else {
                           dbService.addUser(user).then((value) {
-                            FormHelper.showSimpleAlertDialog(context, "SQFlite",
-                                "Data added successfully ", "Ok", () {
+                            FormHelper.showSimpleAlertDialog(
+                                context,
+                                "SQFlite",
+                                "Data added successfully ",
+                                "Ok", () {
+                                  setState(() {
+
+                                  });
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => MyHomePage()));
+                                      builder: (context) =>
+                                          ViewScreen()));
                             });
                           });
                           globalKey.currentState!.save();
@@ -408,64 +389,37 @@ class _AddScreenState extends State<AddScreen> {
 
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(251, 250, 240, 0.3),
-        title: Text(
-          widget.isEditMode ? 'Edit Details' : "Add Details",
-          style: TextStyle(
-            color: Color.fromRGBO(34, 33, 91, 1),
-            fontSize: 16,
-            fontFamily: 'Gilroy-Semibold',
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                  /*  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Icon(
-                          Icons.arrow_back_ios_rounded,
-                          size: 20,
-                          color: Color.fromRGBO(34, 33, 91, 1),
-                        ),
-                      ),
-                      Text(
-                        widget.isEditMode ? 'Edit Details' : "Add Details",
-                        style: TextStyle(
-                          color: Color.fromRGBO(34, 33, 91, 1),
-                          fontSize: 16,
-                          fontFamily: 'Gilroy-Semibold',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                    ],
-                  ),*/
-                ),
-                Form(
-                  key: globalKey,
-                  child: _formUI(),
-                ),
-              ],
+          appBar: AppBar(
+            backgroundColor: Color.fromRGBO(251, 250, 240, 0.3),
+            title: Text(
+              widget.isEditMode ? 'Edit Details' : "Add Details",
+              style: TextStyle(
+                color: Color.fromRGBO(34, 33, 91, 1),
+                fontSize: 16,
+                fontFamily: 'Gilroy-Semibold',
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
-        ],
-      ),
-    ));
+          body: ListView(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    ),
+                    Form(
+                      key: globalKey,
+                      child: _formUI(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 
   Future<void> pickDateOfBirth(BuildContext context) async {
@@ -475,12 +429,12 @@ class _AddScreenState extends State<AddScreen> {
         firstDate: DateTime(DateTime.now().year - 100),
         lastDate: DateTime(DateTime.now().year + 1),
         builder: (context, child) => Theme(
-              data: ThemeData().copyWith(
-                  colorScheme: ColorScheme.light(
+          data: ThemeData().copyWith(
+              colorScheme: ColorScheme.light(
                 primary: Colors.black,
               )),
-              child: child ?? const Text(''),
-            ));
+          child: child ?? const Text(''),
+        ));
     if (newDate == null) {
       return;
     }
@@ -515,16 +469,6 @@ class _AddScreenState extends State<AddScreen> {
         age--;
       }
     }
-    /*if (user.Gender == 1 && age >= 21) {
-      isDisableButton = false;
-    } else if (user.Gender == 2 && age >= 18) {
-      isDisableButton = false;
-    } else if (user.Gender == 3 && age >= 18) {
-      isDisableButton = false;
-    } else {
-      isDisableButton = true;
-    }*/
-
     return age;
   }
 }

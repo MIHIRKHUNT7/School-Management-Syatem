@@ -44,7 +44,7 @@ abstract class DataBasehelper {
   static Future<List<Map<String, dynamic>>> query(String a) async {
     String search = '\'%' + a + '%\'';
     return database!
-        .rawQuery('SELECT * FROM userTable where UserName LIKE $search');
+        .rawQuery('SELECT * FROM userTable' +(a.isNotEmpty?' where UserName LIKE $search':''));
   }
 
   static Future<int> insert(String userTable, Meta meta) async {

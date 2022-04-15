@@ -49,35 +49,6 @@ class _ViewScreenState extends State<ViewScreen> {
           children: [
             Column(
               children: [
-               /* Container(
-                  margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Icon(
-                          Icons.arrow_back_ios_rounded,
-                          size: 20,
-                          color: Color.fromRGBO(34, 33, 91, 1),
-                        ),
-                      ),
-                      Text(
-                        "View Details",
-                        style: TextStyle(
-                          color: Color.fromRGBO(34, 33, 91, 1),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                    ],
-                  ),
-                ),*/
                 _fetchData(),
               ],
             ),
@@ -149,7 +120,7 @@ class _ViewScreenState extends State<ViewScreen> {
                           ),
                           Container(
                             padding:
-                                EdgeInsets.only(right: 30, top: 30, bottom: 30),
+                            EdgeInsets.only(right: 30, top: 30, bottom: 30),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -157,15 +128,14 @@ class _ViewScreenState extends State<ViewScreen> {
                                 Expanded(
                                   //  flex: 2,
                                   child: Container(
-                                    width: double.infinity,
                                     height: 210,
                                     padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                                     child: ListView(
-                                       //scrollDirection: Axis.horizontal,
+                                      scrollDirection: Axis.horizontal,
                                       children: [
                                         Column(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               children: [
@@ -291,13 +261,13 @@ class _ViewScreenState extends State<ViewScreen> {
                                                 ),
                                                 Text(
                                                     nb[index].toJson()[
-                                                        'MobileNumber'],
+                                                    'MobileNumber'],
                                                     style: TextStyle(
                                                       fontSize: 13,
                                                       color: Color.fromRGBO(
                                                           255, 255, 255, 0.6),
                                                       fontWeight:
-                                                          FontWeight.w400,
+                                                      FontWeight.w400,
                                                     ))
                                               ],
                                             ),
@@ -318,7 +288,7 @@ class _ViewScreenState extends State<ViewScreen> {
                                                       color: Color.fromRGBO(
                                                           255, 255, 255, 0.6),
                                                       fontWeight:
-                                                          FontWeight.w400,
+                                                      FontWeight.w400,
                                                     ))
                                               ],
                                             ),
@@ -340,7 +310,7 @@ class _ViewScreenState extends State<ViewScreen> {
                                                       color: Color.fromRGBO(
                                                           255, 255, 255, 0.6),
                                                       fontWeight:
-                                                          FontWeight.w400,
+                                                      FontWeight.w400,
                                                     ))
                                               ],
                                             ),
@@ -368,100 +338,80 @@ class _ViewScreenState extends State<ViewScreen> {
                                             ),
                                             Row(
                                               children: [
-                                                Expanded(
-                                                  child: Column(
+                                                Container(
+                                                  margin:
+                                                  EdgeInsets.only(
+                                                      top: 20),
+                                                  child: Row(
                                                     children: [
-                                                      /*Image.asset(
-                                                      nb[index].toJson()["Gender"] as int == 1
-                                                          ? "assets/image/Male.png"
-                                                          : nb[index].toJson()["Gender"]
-                                                      as int ==
-                                                          2
-                                                          ? "assets/image/Female.png"
-                                                          : "assets/image/Transgender.png",
-                                                      height: 60,
-                                                      width: 60,
-                                                    ),*/
-                                                      Container(
-                                                        margin:
-                                                            EdgeInsets.only(
-                                                                top: 20),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          children: [
-                                                            GestureDetector(
-                                                              onTap: () {
-                                                                Navigator.push(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                        builder: (context) => AddScreen(
-                                                                              isEditMode: true,
-                                                                              user: user[index],
-                                                                            )));
-                                                              },
-                                                              child: Icon(
-                                                                Icons.edit,
-                                                                color: Colors
-                                                                    .green,
-                                                                size: 30,
-                                                              ),
-                                                            ),
-                                                            GestureDetector(
-                                                              onTap: () {
-                                                                showDialog(
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        (BuildContext
-                                                                            contex) {
-                                                                      return AlertDialog(
-                                                                        title:
-                                                                            Text("Delete"),
-                                                                        content:
-                                                                            Text("Do you want to delete this record"),
-                                                                        actions: [
-                                                                          Row(
-                                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                                                            children: [
-                                                                              ElevatedButton(
-                                                                                onPressed: () {
-                                                                                  dbService.deleteUser(nb[index]).then(
-                                                                                    (value) {
-                                                                                      setState(() {
-                                                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
-                                                                                      });
-                                                                                    },
-                                                                                  );
-                                                                                },
-                                                                                child: Text("Delete"),
-                                                                              ),
-                                                                              SizedBox(
-                                                                                width: 5,
-                                                                              ),
-                                                                              ElevatedButton(
-                                                                                onPressed: () {
-                                                                                  Navigator.of(context).pop();
-                                                                                },
-                                                                                child: Text("No"),
-                                                                              )
-                                                                            ],
-                                                                          )
-                                                                        ],
-                                                                      );
-                                                                    });
-                                                              },
-                                                              child: Icon(
-                                                                Icons
-                                                                    .delete_rounded,
-                                                                color: Colors
-                                                                    .red,
-                                                                size: 30,
-                                                              ),
-                                                            )
-                                                          ],
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => AddScreen(
+                                                                    isEditMode: true,
+                                                                    user: user[index],
+                                                                  )));
+                                                        },
+                                                        child: Icon(
+                                                          Icons.edit,
+                                                          color: Colors
+                                                              .green,
+                                                          size: 30,
+                                                        ),
+                                                      ),
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          showDialog(
+                                                              context:
+                                                              context,
+                                                              builder:
+                                                                  (BuildContext
+                                                              contex) {
+                                                                return AlertDialog(
+                                                                  title:
+                                                                  Text("Delete"),
+                                                                  content:
+                                                                  Text("Do you want to delete this record"),
+                                                                  actions: [
+                                                                    Row(
+                                                                      children: [
+                                                                        ElevatedButton(
+                                                                          onPressed: () {
+                                                                            dbService.deleteUser(nb[index]).then(
+                                                                                  (value) {
+                                                                                setState(()
+                                                                                {
+                                                                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                                                                                }
+                                                                                );
+                                                                              },
+                                                                            );
+                                                                          },
+                                                                          child: Text("Delete"),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width: 5,
+                                                                        ),
+                                                                        ElevatedButton(
+                                                                          onPressed: () {
+                                                                            Navigator.of(context).pop();
+                                                                          },
+                                                                          child: Text("No"),
+                                                                        )
+                                                                      ],
+                                                                    )
+                                                                  ],
+                                                                );
+                                                              });
+                                                        },
+                                                        child: Icon(
+                                                          Icons
+                                                              .delete_rounded,
+                                                          color: Colors
+                                                              .red,
+                                                          size: 30,
                                                         ),
                                                       )
                                                     ],
@@ -474,7 +424,7 @@ class _ViewScreenState extends State<ViewScreen> {
                                       ],
                                     ),
                                   ),
-                                ),
+                                )
                               ],
                             ),
                           ),
